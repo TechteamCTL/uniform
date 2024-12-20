@@ -70,9 +70,9 @@ const CanvasArea = ({ canvasInstance, handleCanvasClick, setCanvasAreas, canvasA
             }
         };
         
-    
-        
         loadCanvasContent();
+
+        
 
         return () => {
             canvas.dispose();

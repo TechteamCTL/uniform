@@ -8,6 +8,7 @@ import styles from "./page.module.css";
 import CanvasEditContainer from "./components/CanvasEditContainer/CanvasEditContainer";
 import TextEditingPanel from "./components/TextEditingPanel/TextEditingPanel";
 import CanvasSendSharePanel from "./components/CanvasSendSharePanel/CanvasSendSharePanel";
+import { ColorPicker } from "antd";
 
 export const CanvasCTX = createContext<CanvasContext>({
   activeCanvasId: null,
