@@ -1,0 +1,10 @@
+.sendSharePanel {
+    position: absolute;
+    background-color: gainsboro;
+    padding: 25px 25px;
+    bottom: 50px;
+    right: 50px;
+    background-color: rgba(246, 246, 246, .9);
+    border-radius: .25rem;
+    z-index: 100;
+}

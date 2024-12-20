@@ -1,0 +1,41 @@
+.textEditingPanel {
+    width: 100%;
+    max-width: 400px;
+    background-color: rgba(246, 246, 246, .9);
+    border-radius: .25rem;
+    padding: 25px 25px;
+    color: #464646;
+}
+
+.textEditingPanelTitle {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.textInput {
+     margin-bottom: 20px;
+}
+
+.textEditingPanelBtn {
+    display: flex;
+    gap: 10px;
+}
+
+.textEditingPanelOptions {
+     display: flex;
+     flex-direction: column;
+     /* gap: 25px; */
+}
+
+.textColor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+    border-bottom: 1px solid #b7b7b7;
+    padding-bottom: 15px;
+    padding-top: 15px;
+}
+
+

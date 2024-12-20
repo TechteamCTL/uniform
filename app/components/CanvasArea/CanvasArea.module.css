@@ -1,0 +1,9 @@
+.editPanelCanvas {
+    position: absolute;
+    overflow: visible;
+    z-index: 5;
+    /* top: 31.75%;
+    left: 31.25%;
+    width: 38.25%;
+    height: 38.25%; */
+}

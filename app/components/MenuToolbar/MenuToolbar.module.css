@@ -1,0 +1,86 @@
+.menuContainer {
+    display: flex;
+    padding: 1.375rem;
+    margin-bottom: 5rem;
+    min-height: 400px;
+    min-width: 528px;
+    flex-basis: 34%;
+    transform: translateZ(0);
+    z-index: 1;
+    gap: 25px;
+
+}
+
+.verticalToolbar {
+    width: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    /* background-color: #333; */
+    background-color: #464646;
+    border-radius: .25rem;
+}
+
+.verticalToolbarButtonGroup {
+    flex-shrink: 0;
+    padding: 2rem 0 0;
+}
+
+.menuButton {
+    align-items: center;
+    display: flex;
+    flex: 0 1 auto;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.verticalToolbarItem {
+    border-left: 3px solid transparent;
+    border-right: 1px solid transparent;
+    width: 100%;
+    text-align: center;
+    padding: .5rem 0;
+    will-change: transform;
+}
+
+.menuButton.isActionable {
+    cursor: pointer;
+}
+
+.verticalToolbar .verticalToolbarItem {
+    color: #b7b7b7;
+}
+
+.verticalToolbarItem .menuButtonIcon {
+    width: 100%;
+}
+
+.verticalToolbar .verticalToolbarItem svg {
+    fill: #b7b7b7;
+}
+.verticalToolbarItem .menuButtonIcon>svg {
+    width: 3rem;
+    height: 3rem;
+    margin: -.5rem 0;
+}
+
+.verticalToolbarItem .menuButtonText {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    margin-top: .125rem;
+    padding: 0 .25rem;
+    width: 100%;
+    text-transform: capitalize;
+}
+
+.menuButtonText {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    margin-top: .3rem;
+    text-transform: capitalize;
+    font-size: .694rem;
+    letter-spacing: 0;
+}
