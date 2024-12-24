@@ -1,0 +1,17 @@
+.imageEditingPanel {
+    width: 100%;
+    max-width: 400px;
+    background-color: rgba(246, 246, 246, .9);
+    border-radius: .25rem;
+    padding: 25px 25px;
+    color: #464646;
+}
+
+.imageEditingPanelTitle {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.imageUploadWrapper {
+     height: 300px;
+}

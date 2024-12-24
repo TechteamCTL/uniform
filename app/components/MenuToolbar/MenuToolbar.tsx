@@ -7,9 +7,10 @@ import {addDeleteControlToTextbox} from "../../fabricSetup";
 import styles from "./MenuToolbar.module.css";
 import TextEditingPanel from "../TextEditingPanel/TextEditingPanel";
 import { ColorPicker } from "antd";
+import ImageEditingPanel from "../ImageEditingPanel/ImageEditingPanel";
 
-const MenuToolbar = ({isOpenEditingPanel, setIsOpenEditingPanel}) => {
-    const { activeCanvasId, activeCanvas, setCanvasArrayTotal  } = useContext(CanvasCTX);
+const MenuToolbar = ({isOpenEditingPanel, setIsOpenEditingPanel, isOpenImageEditingPanel, setIsOpenImageEditingPanel}) => {
+    const { activeCanvasId, activeCanvas, setCanvasArrayTotal, canvasArrayTotal  } = useContext(CanvasCTX);
 const [activeObject, setActiveObject] = useState()
 
     // const activeObject = activeCanvas?.getActiveObject();
@@ -45,8 +46,11 @@ const [activeObject, setActiveObject] = useState()
   }
   
   const addTextToCanvas = () => {
+    if(canvasArrayTotal && canvasArrayTotal[activeCanvasId]?.objects.length === 2) return;
+
       setIsOpenEditingPanel(true)
         if(activeCanvasId && activeCanvas) {
+          
             console.log("activeCanvas", activeCanvas)
             // const canvas = new fabric.Canvas(activeCanvasId);
             const text = new fabric.Textbox("Edit text", {
@@ -141,9 +145,10 @@ const [activeObject, setActiveObject] = useState()
                           setActiveObject(activeObject)
       
                           activeCanvas.requestRenderAll();
+                          setIsOpenEditingPanel(true);
                       }
 
-                      setIsOpenEditingPanel(true);
+                      
                   }
               };
       
@@ -253,11 +258,55 @@ const [activeObject, setActiveObject] = useState()
     });
   }
 
+
+  const addImageToCanvas = (e) => {
+    if(activeCanvasId && activeCanvas) {
+     let imgObj = e.target.files[0];
+     let reader = new FileReader();
+     reader.readAsDataURL(imgObj);
+     reader.onload = (e) => {
+      let imageUrl = e.target.result;
+      let imageElement = document.createElement('img');
+      imageElement.src = imageUrl;
+      imageElement.onload = function () {
+      //   let image = new fabric.Image(imageElement, (img) => {
+      //     const desiredWidth = 100;
+      //     const desiredHeight = 100;
+      //     console.log(img.width)
+
+      //     const scaleX = desiredWidth / img.width;
+      // const scaleY = desiredHeight / img.height;
+
+      //     img.set({
+      //       left: 100,  // X position
+      //       top: 100,   // Y position
+      //       angle: 0,   // Rotation angle
+      //       scaleX: scaleX,
+      //       scaleY: scaleY,
+      //               });
+      //   });
+
+      const image = new fabric.Image(imageElement, {
+        scaleX: 0.1,
+        scaleY: 0.1,
+      });
+        
+  
+        activeCanvas.add(image);
+        activeCanvas.centerObject(image);
+        activeCanvas.setActiveObject(image);
+        activeCanvas.renderAll();
+      }
+     }
+  }
+  }
+
     return (
         <div className={`${styles.menuContainer}`}>
             <div className={styles.verticalToolbar}>
                 <div className={styles.verticalToolbarButtonGroup}>
                     <div className={`${styles.menuButton} ${styles.isActionable} ${styles.verticalToolbarItem}`}>
+                      {/* <input type="file" accept="image/*" onChange={addImageToCanvas}/>  */}
                         <div className={styles.menuButtonIcon} data-testid="MenuButton-icon">
                             <svg id="_11-upload" data-name="11-upload" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38.98 38.98">
                             <path className="cls-1" d="M19.38 24.81h.22l-.11-.1Z"></path>
@@ -265,7 +314,8 @@ const [activeObject, setActiveObject] = useState()
                             <path className="cls-1" d="M22.79 25.81 19.9 23a.58.58 0 0 0-.81 0l-2.9 2.79a.58.58 0 0 0 .41 1h1.47V30h2.86v-3.18h1.47a.58.58 0 0 0 .39-1.01Z"></path>
                             </svg>
                         </div>
-                    <div data-testid="MenuButton-text" className={styles.menuButtonText}>Upload</div>
+                    {/* <div data-testid="MenuButton-text" className={styles.menuButtonText}>Upload</div> */}
+                    <button className={styles.menuButtonText} onClick={() => setIsOpenImageEditingPanel(true)}>Upload</button>
                     </div>
                     <div className={`${styles.menuButton} ${styles.isActionable} ${styles.verticalToolbarItem}`} >
                         <div className={styles.menuButtonIcon} data-testid="MenuButton-icon">
@@ -281,6 +331,9 @@ const [activeObject, setActiveObject] = useState()
 
             {isOpenEditingPanel && 
             <TextEditingPanel saveCanvasContent={saveCanvasContent} activeObject={activeObject} />
+            }
+            {isOpenImageEditingPanel && 
+            <ImageEditingPanel />
             }
 
         </div>

@@ -59,6 +59,7 @@ type CanvasContext = {
 export default function Home() {
   const [activeCanvasArea, setActiveCanvasArea] = useState("canvas-1");
   const [ isOpenEditingPanel, setIsOpenEditingPanel ] = useState(false);
+  const [ isOpenImageEditingPanel, setIsOpenImageEditingPanel ] = useState(false);
   // const [editText, setEditText] = useState("Edit this text");
 
 
@@ -93,6 +94,8 @@ useEffect(() => {
       <MenuToolbar 
         isOpenEditingPanel={isOpenEditingPanel} 
         setIsOpenEditingPanel={setIsOpenEditingPanel} 
+        isOpenImageEditingPanel={isOpenImageEditingPanel}
+        setIsOpenImageEditingPanel={setIsOpenImageEditingPanel}
         // setEditText={setEditText} 
         // editText={editText}
         />

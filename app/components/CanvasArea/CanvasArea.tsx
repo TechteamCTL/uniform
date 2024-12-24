@@ -113,7 +113,7 @@ const CanvasArea = ({ canvasInstance, handleCanvasClick, setCanvasAreas, canvasA
     useEffect(() => {
         
         if(activeCanvas) {
-            console.log("moving")
+            
             activeCanvas.on("object:moving", (e) => {
                 const obj = e.target;
                 const { left, top, width, height, scaleX, scaleY } = obj;
@@ -129,6 +129,39 @@ const CanvasArea = ({ canvasInstance, handleCanvasClick, setCanvasAreas, canvasA
                 if (left + objWidth > canvasWidth) obj.left = canvasWidth - objWidth;
                 if (top + objHeight > canvasHeight) obj.top = canvasHeight - objHeight;
               });
+
+
+              activeCanvas.on('object:scaling', function (e) {
+                const obj = e.target;
+              
+                // Get the current scaling factors
+                const scaleX = obj.scaleX;
+                const scaleY = obj.scaleY;
+              
+                // Calculate the new dimensions
+                const newWidth = obj.width * scaleX;
+                const newHeight = obj.height * scaleY;
+              
+                // Ensure the object stays within the canvas horizontally
+                if (obj.left + newWidth > activeCanvas.width) {
+                  obj.set('scaleX', (activeCanvas.width - obj.left) / obj.width);
+                }
+                if (obj.left < 0) {
+                  obj.set('scaleX', obj.left / obj.width);
+                }
+              
+                // Ensure the object stays within the canvas vertically
+                if (obj.top + newHeight > activeCanvas.height) {
+                  obj.set('scaleY', (activeCanvas.height - obj.top) / obj.height);
+                }
+                if (obj.top < 0) {
+                  obj.set('scaleY', obj.top / obj.height);
+                }
+              
+                // Update the canvas to reflect the new scale
+                activeCanvas.renderAll();
+              });
+
         }
        
       }, [activeCanvas]);
